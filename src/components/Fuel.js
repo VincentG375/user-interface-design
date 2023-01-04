@@ -1,5 +1,5 @@
 import Form from "react-bootstrap/Form";
-import {FormGroup, FormLabel} from "react-bootstrap";
+import {FormGroup, FormLabel, FormSelect} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
 const Fuel = ({nextStep, handleChange, values}) => {
@@ -19,8 +19,11 @@ const Fuel = ({nextStep, handleChange, values}) => {
                         onChange={handleChange('fueltype')}
                     >
                         <option>Diesel</option>
-                        <option>Regular Petrol</option>
-                        <option>Hi-Grade Petrol</option>
+                        <optgroup label="Petrol">
+                            <option>Hi-Grade</option>
+                            <option>Regular</option>
+                        </optgroup>
+
                     </Form.Select>
                 </FormGroup>
                 <Button onClick={Continue}>Next</Button>

@@ -11,8 +11,9 @@ export default class homepage extends Component{
     state = {
         step: 1,
         fueltype: 'Diesel',
-        paymentype: '',
+        paymenttype: '',
         cardNumber: '',
+        payAdvance: false,
         fixedAmount: 0,
     }
     prevStep = () => {
@@ -23,15 +24,34 @@ export default class homepage extends Component{
         const { step } = this.state;
         this.setState({ step: step + 1 });
     }
+    returnReset = () => {
+        const { step } = this.state;
+        this.setState({ step: 1 });
+    }
     handleChange = input => e => {
         this.setState({ [input]: e.target.value });
     }
     render(){
         const{step}=this.state;
-        const{fueltype,paymenttype,cardNumber,fixedAmount}=this.state;
-        const values = {fueltype,paymenttype,cardNumber,fixedAmount}
+        const{fueltype,paymenttype,cardNumber,fixedAmount, payAdvance}=this.state;
+        const values = {fueltype,paymenttype,cardNumber,fixedAmount, payAdvance}
         switch(step) {
             case 1:
+                return (
+
+                    <div style={{width:'100%',height:'100%'}}>
+                        <h1>Hello and welcome to our fueling service</h1>
+                        <Button onClick={this.nextStep} style={{
+                            position:'absolute',
+                            top:'50%',
+                            left:'45%',
+                            with: '20%'
+                        }}>
+                            Start
+                        </Button>
+                    </div>
+                )
+            case 2:
                 return (
                     <Fuel
                         nextStep={this.nextStep}
@@ -39,7 +59,7 @@ export default class homepage extends Component{
                         values={values}
                     />
                 )
-            case 2:
+            case 3:
                 return (
                     <Payment
                         prevStep={this.prevStep}
@@ -48,7 +68,7 @@ export default class homepage extends Component{
                         values={values}
                     />
                 )
-            case 3:
+            case 4:
                 return (
                     <Progress
                         prevStep={this.prevStep}
