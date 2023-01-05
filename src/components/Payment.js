@@ -2,11 +2,19 @@ import Form from "react-bootstrap/Form";
 import {ButtonGroup, FormCheck, FormGroup, FormLabel, ToggleButton} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useState} from "react";
-const Payment = ({prevStep, nextStep, handleChange, values}) => {
+const Payment = ({prevStep, nextStep, returnReset, handleChange, values}) => {
     const [radioValue, setRadioValue] = useState('1');
     const Return = e => {
         e.preventDefault();
         prevStep();
+    }
+    const Cancel = e => {
+        // eslint-disable-next-line no-restricted-globals
+        var result = confirm("Do you really want to cancel the process?");
+        if (result) {
+            e.preventDefault();
+            returnReset();
+        }
     }
     const Continue = e => {
         e.preventDefault();
@@ -21,17 +29,16 @@ const Payment = ({prevStep, nextStep, handleChange, values}) => {
     }
     return(
         <div>
-            {values.fueltype}
-            <Form>
+            <Form style={{display:"flex", flexDirection: "column", justifyContent:"space-around"}}>
                 <FormGroup>
-                    <FormLabel>How do you want to pay?</FormLabel>
-                    <ButtonGroup>
+                    <FormLabel style={{marginRight:"10px"}}>How do you want to pay?</FormLabel>
+                    <div>
                         {radios.map((radio, idx) => (
                             <ToggleButton
                                 key={idx}
                                 id={`radio-${idx}`}
                                 type="radio"
-                                variant={idx % 2 ? 'outline-success' : 'outline-danger'}
+                                variant={idx % 2 ? 'outline-dark' : 'outline-dark'}
                                 name="radio"
                                 value={radio.value}
                                 checked={radioValue === radio.value}
@@ -40,7 +47,8 @@ const Payment = ({prevStep, nextStep, handleChange, values}) => {
                                 {radio.name}
                             </ToggleButton>
                         ))}
-                    </ButtonGroup>
+                    </div>
+
                 </FormGroup>
                 <FormGroup>
                     <FormLabel>Do you want to pay in advance?</FormLabel>
@@ -48,15 +56,23 @@ const Payment = ({prevStep, nextStep, handleChange, values}) => {
                         name="checkBox"
                         value={true}
                         onChange={handleChange('payAdvance')}
-                        onInput={inAdvance}></FormCheck>
-                    {values.payAdvance}
+                        onInput={inAdvance}>
+                    </FormCheck>
                 </FormGroup>
                 <FormGroup>
                     <FormLabel>How much do you want to pay?</FormLabel>
-                    <Form.Control type="number" onChange={handleChange('fixedAmount')} placeholder="Enter amount" />
+                    <Form.Control
+                        type="number"
+                        onChange={handleChange('fixedAmount')}
+                        placeholder="Enter amount"
+                        style={{marginBottom:"20px"}}
+                    />
                 </FormGroup>
-                <Button onClick={Return} style={{marginRight:"10px"}}>Prev</Button>
-                <Button onClick={Continue}>Next</Button>
+                <div>
+                    <Button onClick={Return} style={{marginRight:"10px"}}>Back</Button>
+                    <Button onClick={Continue} style={{marginRight:"10px"}}>Next</Button>
+                    <Button onClick={Cancel} variant="danger">Cancel Process</Button>
+                </div>
             </Form>
         </div>
     )

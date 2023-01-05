@@ -15,6 +15,12 @@ export default class homepage extends Component{
         cardNumber: '',
         payAdvance: false,
         fixedAmount: 0,
+        fuelAmount: 0,
+        dieselPrice: 1.23,
+        higradePrice: 1.34,
+        regularPrice: 1.29,
+        endPrice: 5
+
     }
     prevStep = () => {
         const { step } = this.state;
@@ -31,10 +37,16 @@ export default class homepage extends Component{
     handleChange = input => e => {
         this.setState({ [input]: e.target.value });
     }
+    calculateEndPrice = () => {
+        const { endPrice } = this.state;
+        this.setState({endPrice : 7});
+    }
     render(){
         const{step}=this.state;
-        const{fueltype,paymenttype,cardNumber,fixedAmount, payAdvance}=this.state;
-        const values = {fueltype,paymenttype,cardNumber,fixedAmount, payAdvance}
+        const{fueltype,paymenttype,cardNumber,fixedAmount, payAdvance,
+            fuelAmount, endPrice,dieselPrice, higradePrice, regularPrice}=this.state;
+        const values = {fueltype,paymenttype,cardNumber,fixedAmount, payAdvance,
+            fuelAmount, endPrice, dieselPrice, higradePrice, regularPrice }
         switch(step) {
             case 1:
                 return (
@@ -43,10 +55,13 @@ export default class homepage extends Component{
                         <h1>Hello and welcome to our fueling service</h1>
                         <Button onClick={this.nextStep} style={{
                             position:'absolute',
-                            top:'50%',
-                            left:'45%',
-                            with: '20%'
-                        }}>
+                            top:'30%',
+                            left:'40%',
+                            width: '20%',
+                            height: '30%'
+                            }}
+                            variant="success"
+                        >
                             Start
                         </Button>
                     </div>
@@ -55,6 +70,7 @@ export default class homepage extends Component{
                 return (
                     <Fuel
                         nextStep={this.nextStep}
+                        returnReset={this.returnReset}
                         handleChange={this.handleChange}
                         values={values}
                     />
@@ -64,6 +80,7 @@ export default class homepage extends Component{
                     <Payment
                         prevStep={this.prevStep}
                         nextStep={this.nextStep}
+                        returnReset={this.returnReset}
                         handleChange={this.handleChange}
                         values={values}
                     />
@@ -73,9 +90,19 @@ export default class homepage extends Component{
                     <Progress
                         prevStep={this.prevStep}
                         nextStep={this.nextStep}
+                        returnReset={this.returnReset}
                         handleChange={this.handleChange}
                         values={values}
                     />
+                )
+            case 5:
+                return (
+                    <div>
+                        The refuelling process is finished. You have filled up with {fuelAmount} litres of diesel for {endPrice} euros!
+                        <div style={{marginTop: '20px'}}>
+                            <Button onClick={this.returnReset}>Finish</Button>
+                        </div>
+                    </div>
                 )
             default:
         }
