@@ -1,7 +1,5 @@
-import {Card, FormGroup} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import './Homepage.css';
-import Form from 'react-bootstrap/Form';
 import {Component} from "react";
 import Fuel from "./Fuel";
 import Payment from "./Payment";
@@ -15,7 +13,7 @@ export default class homepage extends Component{
         cardNumber: '',
         payAdvance: false,
         fixedAmount: 0,
-        fuelAmount: 0,
+        fuelAmount: 4,
         dieselPrice: 1.23,
         higradePrice: 1.34,
         regularPrice: 1.29,
@@ -37,10 +35,10 @@ export default class homepage extends Component{
     handleChange = input => e => {
         this.setState({ [input]: e.target.value });
     }
-    calculateEndPrice = () => {
+    /*calculateEndPrice = () => {
         const { endPrice } = this.state;
         this.setState({endPrice : 7});
-    }
+    }*/
     render(){
         const{step}=this.state;
         const{fueltype,paymenttype,cardNumber,fixedAmount, payAdvance,

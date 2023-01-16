@@ -1,5 +1,5 @@
 import Form from "react-bootstrap/Form";
-import {ButtonGroup, FormCheck, FormGroup, FormLabel, ToggleButton} from "react-bootstrap";
+import { FormCheck, FormGroup, FormLabel, ToggleButton} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useState} from "react";
 const Payment = ({prevStep, nextStep, returnReset, handleChange, values}) => {
@@ -20,6 +20,10 @@ const Payment = ({prevStep, nextStep, returnReset, handleChange, values}) => {
         e.preventDefault();
         nextStep();
     }
+    const PayAdvance = e =>{
+        handleChange('payAdvance')
+        document.getElementById()
+    }
     const radios = [
         { name: 'Card', value: 'card' },
         { name: 'Cash', value: 'cash' }
@@ -38,7 +42,7 @@ const Payment = ({prevStep, nextStep, returnReset, handleChange, values}) => {
                                 key={idx}
                                 id={`radio-${idx}`}
                                 type="radio"
-                                variant={idx % 2 ? 'outline-dark' : 'outline-dark'}
+                                variant={idx % 2 ? 'outline-secondary' : 'outline-secondary'}
                                 name="radio"
                                 value={radio.value}
                                 checked={radioValue === radio.value}
@@ -53,11 +57,12 @@ const Payment = ({prevStep, nextStep, returnReset, handleChange, values}) => {
                 <FormGroup>
                     <FormLabel>Do you want to pay in advance?</FormLabel>
                     <FormCheck
-                        name="checkBox"
+                        id={"checkBox"}
                         value={true}
-                        onChange={handleChange('payAdvance')}
-                        onInput={inAdvance}>
+                        onChange={PayAdvance}
+                        >
                     </FormCheck>
+                    {values.payAdvance}
                 </FormGroup>
                 <FormGroup>
                     <FormLabel>How much do you want to pay?</FormLabel>

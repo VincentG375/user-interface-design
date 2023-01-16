@@ -1,5 +1,5 @@
 import Form from "react-bootstrap/Form";
-import {FormGroup, FormLabel, FormSelect} from "react-bootstrap";
+import {FormGroup, FormLabel} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
 const Fuel = ({nextStep, handleChange, values, returnReset}) => {

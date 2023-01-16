@@ -1,7 +1,6 @@
 import './App.css';
 import Homepage from './components/Homepage';
-import React, { useEffect } from "react";
-import {Card, Navbar} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 function App() {
   return (
       <div>
