@@ -29,7 +29,6 @@ export default class homepage extends Component{
         this.setState({ step: step + 1 });
     }
     returnReset = () => {
-        const { step } = this.state;
         this.setState({ step: 1 });
     }
     handleChange = input => e => {

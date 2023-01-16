@@ -28,9 +28,9 @@ const Payment = ({prevStep, nextStep, returnReset, handleChange, values}) => {
         { name: 'Card', value: 'card' },
         { name: 'Cash', value: 'cash' }
     ];
-    const inAdvance = (e)=> {
+    /*const inAdvance = (e)=> {
         document.getElementById("checkBox").value = false;
-    }
+    }*/
     return(
         <div>
             <Form style={{display:"flex", flexDirection: "column", justifyContent:"space-around"}}>
